@@ -1,13 +1,10 @@
 package de.illilli.opendata.service.schuleninkoeln.json;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.geojson.GeoJsonObject;
-import org.geojson.GeometryCollection;
 import org.geojson.LngLatAlt;
 import org.geojson.Point;
 
@@ -27,7 +24,7 @@ public class SchulenInKoelnBo implements GeoJsonBo {
 	private String id;
 	Map<String, Object> properties;
 	private String type;
-	private GeometryCollection geometryCollection;
+	private GeoJsonObject geometry;
 
 	public SchulenInKoelnBo(Feature feature, FieldAliases fieldAliases) {
 		id = feature.getAttributes().getObjectid();
@@ -60,17 +57,10 @@ public class SchulenInKoelnBo implements GeoJsonBo {
 		properties.put(fieldAliases.getTraeger(), feature.getAttributes()
 				.getTraeger());
 
-		geometryCollection = new GeometryCollection();
 		LngLatAlt coordinates = new LngLatAlt();
 		coordinates.setLatitude(feature.getGeometry().getY());
 		coordinates.setLongitude(feature.getGeometry().getX());
-
-		Point point = new Point();
-		point.setCoordinates(coordinates);
-
-		List<GeoJsonObject> geoJsonObjectList = new ArrayList<GeoJsonObject>();
-		geoJsonObjectList.add(point);
-		geometryCollection.setGeometries(geoJsonObjectList);
+		geometry = new Point(coordinates);
 		logger.debug(this.toString());
 	}
 
@@ -86,7 +76,7 @@ public class SchulenInKoelnBo implements GeoJsonBo {
 
 	@Override
 	public GeoJsonObject getGeometry() {
-		return geometryCollection;
+		return geometry;
 	}
 
 	@Override
@@ -97,8 +87,7 @@ public class SchulenInKoelnBo implements GeoJsonBo {
 	@Override
 	public String toString() {
 		return "SchuleInKoelnBo [id=" + id + ", properties=" + properties
-				+ ", type=" + type + ", geometryCollection="
-				+ geometryCollection + "]";
+				+ ", type=" + type + ", geometryCollection=" + geometry + "]";
 	}
 
 }
