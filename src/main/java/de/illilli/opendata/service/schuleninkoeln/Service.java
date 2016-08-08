@@ -31,7 +31,9 @@ public class Service {
 	 * Dieser Service wandelt den argis-Service von Offene Daten K&ouln;ln in
 	 * ein GeoJson - Struktur. Es werden alle Schulen ausgeliefert.
 	 * <p>
-	 * http://localhost:8080/schuleninkoeln/service
+	 * Beispiel:
+	 * <a href="http://localhost:8080/schuleninkoeln/service/straight">
+	 * /schuleninkoeln/service/straight</a>
 	 * </p>
 	 * 
 	 * @return
@@ -42,9 +44,8 @@ public class Service {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/")
-	public String getKoeln() throws JsonParseException, JsonMappingException,
-			IOException, URISyntaxException {
+	@Path("/straight")
+	public String getKoeln() throws JsonParseException, JsonMappingException, IOException, URISyntaxException {
 		// setze das Character-Encoding fuer die Antwort auf UTF-8
 		response.setCharacterEncoding("UTF-8");
 		logger.debug("requesting schulen in koeln");

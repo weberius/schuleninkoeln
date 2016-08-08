@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.geojson.GeoJsonObject;
 
-public interface GeoJsonBo {
+public interface GeoJson {
 
 	String getId();
 

@@ -9,7 +9,12 @@ import de.illilli.opendata.koeln.arcgis.FieldAliases;
 import de.illilli.opendata.koeln.arcgis.Fields;
 import de.illilli.opendata.koeln.arcgis.SpatialReference;
 
-public class SchulenInKoeln {
+/**
+ * Dieses Objekt wird für die Konvertierung der Schulen in Köln Daten
+ * (http://www.offenedaten-koeln.de/dataset/schulen-k%C3%B6ln) benötigt. Es ist
+ * die deserialisierte Form der dort vorgehaltenen JSON Daten.
+ */
+public class SchulenInKoelnArcgis {
 
 	@JsonProperty("displayFieldName")
 	String displayFieldName;
@@ -76,19 +81,12 @@ public class SchulenInKoeln {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime
-				* result
-				+ ((displayFieldName == null) ? 0 : displayFieldName.hashCode());
-		result = prime * result
-				+ ((features == null) ? 0 : features.hashCode());
-		result = prime * result
-				+ ((fieldAliases == null) ? 0 : fieldAliases.hashCode());
+		result = prime * result + ((displayFieldName == null) ? 0 : displayFieldName.hashCode());
+		result = prime * result + ((features == null) ? 0 : features.hashCode());
+		result = prime * result + ((fieldAliases == null) ? 0 : fieldAliases.hashCode());
 		result = prime * result + ((fields == null) ? 0 : fields.hashCode());
-		result = prime * result
-				+ ((geometryType == null) ? 0 : geometryType.hashCode());
-		result = prime
-				* result
-				+ ((spatialReference == null) ? 0 : spatialReference.hashCode());
+		result = prime * result + ((geometryType == null) ? 0 : geometryType.hashCode());
+		result = prime * result + ((spatialReference == null) ? 0 : spatialReference.hashCode());
 		return result;
 	}
 
@@ -100,7 +98,7 @@ public class SchulenInKoeln {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SchulenInKoeln other = (SchulenInKoeln) obj;
+		SchulenInKoelnArcgis other = (SchulenInKoelnArcgis) obj;
 		if (displayFieldName == null) {
 			if (other.displayFieldName != null)
 				return false;
@@ -136,10 +134,9 @@ public class SchulenInKoeln {
 
 	@Override
 	public String toString() {
-		return "ArcGisJsonObject [displayFieldName=" + displayFieldName
-				+ ", fieldAliases=" + fieldAliases + ", geometryType="
-				+ geometryType + ", spatialReference=" + spatialReference
-				+ ", fields=" + fields + ", features=" + features + "]";
+		return "ArcGisJsonObject [displayFieldName=" + displayFieldName + ", fieldAliases=" + fieldAliases
+				+ ", geometryType=" + geometryType + ", spatialReference=" + spatialReference + ", fields=" + fields
+				+ ", features=" + features + "]";
 	}
 
 }

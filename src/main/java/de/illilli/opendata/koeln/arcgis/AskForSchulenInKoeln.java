@@ -11,7 +11,9 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import de.illilli.opendata.service.schuleninkoeln.json.SchulenInKoeln;
+import de.illilli.opendata.service.AskFor;
+import de.illilli.opendata.service.Config;
+import de.illilli.opendata.service.schuleninkoeln.json.SchulenInKoelnArcgis;
 
 /**
  * Diese Klasse holt sich die Informationen zu den Schulen in Koeln. Dies kann
@@ -23,25 +25,26 @@ import de.illilli.opendata.service.schuleninkoeln.json.SchulenInKoeln;
  * @author wolfram
  *
  */
-public class AskForSchulenInKoeln {
+public class AskForSchulenInKoeln implements AskFor<SchulenInKoelnArcgis> {
 
-	public static final String SCHULEN_IN_KOELN_URL = "http://geoportal1.stadt-koeln.de/ArcGIS/rest/services/Stadtplanthemen/MapServer/6/query?text=&geometry=&geometryType=esriGeometryPoint&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&objectIds=&where=objectid%20is%20not%20null&time=&returnCountOnly=false&returnIdsOnly=false&returnGeometry=true&maxAllowableOffset=&outSR=4326&outFields=*&f=json";
+	public static final String SCHULEN_IN_KOELN_URL = Config.getProperty("odk.schuleninkoeln.url");
 
-	private static final Logger logger = Logger
-			.getLogger(AskForSchulenInKoeln.class);
-	private SchulenInKoeln schulenInKoeln;
+	private static final Logger logger = Logger.getLogger(AskForSchulenInKoeln.class);
+	private SchulenInKoelnArcgis schulenInKoeln;
 
-	public AskForSchulenInKoeln() throws JsonParseException,
-			JsonMappingException, IOException, URISyntaxException {
+	public AskForSchulenInKoeln() throws JsonParseException, JsonMappingException, IOException, URISyntaxException {
+		this(new URL(SCHULEN_IN_KOELN_URL).openStream());
+	}
 
-		InputStream inputStream = new URL(SCHULEN_IN_KOELN_URL).openStream();
-
+	public AskForSchulenInKoeln(InputStream inputStream)
+			throws JsonParseException, JsonMappingException, IOException, URISyntaxException {
 		ObjectMapper mapper = new ObjectMapper();
-		schulenInKoeln = mapper.readValue(inputStream, SchulenInKoeln.class);
+		schulenInKoeln = mapper.readValue(inputStream, SchulenInKoelnArcgis.class);
 		logger.debug(schulenInKoeln.toString());
 	}
 
-	public SchulenInKoeln getSchulenInKoeln() {
+	@Override
+	public SchulenInKoelnArcgis getData() {
 		return schulenInKoeln;
 	}
 

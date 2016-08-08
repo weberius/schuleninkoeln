@@ -10,23 +10,23 @@ import org.geojson.Point;
 
 import de.illilli.opendata.koeln.arcgis.Feature;
 import de.illilli.opendata.koeln.arcgis.FieldAliases;
-import de.illilli.opendata.koeln.geojson.GeoJsonBo;
+import de.illilli.opendata.koeln.geojson.GeoJson;
 
 /**
  * Diese Klasse setzt die Werte in ein GeoJson - Objekt um
  *
  */
-public class SchulenInKoelnBo implements GeoJsonBo {
+public class SchulenInKoelnGeoJson implements GeoJson {
 
 	private static final Logger logger = Logger
-			.getLogger(SchulenInKoelnBo.class);
+			.getLogger(SchulenInKoelnGeoJson.class);
 
 	private String id;
 	Map<String, Object> properties;
 	private String type;
 	private GeoJsonObject geometry;
 
-	public SchulenInKoelnBo(Feature feature, FieldAliases fieldAliases) {
+	public SchulenInKoelnGeoJson(Feature feature, FieldAliases fieldAliases) {
 		id = feature.getAttributes().getObjectid();
 		type = "Point";
 		properties = new HashMap<String, Object>();
