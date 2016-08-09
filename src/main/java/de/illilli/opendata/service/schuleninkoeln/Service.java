@@ -32,8 +32,8 @@ public class Service {
 	 * ein GeoJson - Struktur. Es werden alle Schulen ausgeliefert.
 	 * <p>
 	 * Beispiel:
-	 * <a href="http://localhost:8080/schuleninkoeln/service/straight">
-	 * /schuleninkoeln/service/straight</a>
+	 * <a href="http://localhost:8080/schuleninkoeln/service/">/schuleninkoeln/
+	 * service/</a>
 	 * </p>
 	 * 
 	 * @return
@@ -44,7 +44,7 @@ public class Service {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	@Path("/straight")
+	@Path("/")
 	public String getKoeln() throws JsonParseException, JsonMappingException, IOException, URISyntaxException {
 		// setze das Character-Encoding fuer die Antwort auf UTF-8
 		response.setCharacterEncoding("UTF-8");
